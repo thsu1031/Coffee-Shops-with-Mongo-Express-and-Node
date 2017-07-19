@@ -1,0 +1,87 @@
+extends layout
+
+block content
+  .row.page-header
+    .col-lg-12
+      h1 Verita Coffee Bar & Roastery
+  .row
+    .col-xs-12.col-md-9
+      .row
+        .col-xs-12.col-sm-6
+          p.rating
+            span.glyphicon.glyphicon-heart
+            span.glyphicon.glyphicon-heart 
+            span.glyphicon.glyphicon-heart 
+            span.glyphicon.glyphicon-heart 
+            span.glyphicon.glyphicon-heart-empty
+           p 9414 W Central Ave, Wichita, KS 67212
+           .panel.panel-primary
+             .panel-heading
+               h2.panel-title Opening hours
+             .panel-body
+               p Monday - Saturday: 7AM-7PM
+               p Sunday: Closed 
+           .panel.panel-primary
+             .panel-heading
+               h2.panel-title Facilites 
+             .panel-body
+               span.label.label-warning
+                 span.glyphicon.glyphicon-pushpin
+                 &nbsp; Prepared food
+               &nbsp;
+               span.label.label-warning
+                 span.glyphicon.glyphicon-pushpin
+                 &nbsp; Coffee
+               &nbsp;
+               span.label.label-warning
+                 span.glyphicon.glyphicon-pushpin
+                 &nbsp; Wifi
+               &nbsp;
+        .col-xs-12.col-sm-6.location-map
+          .panel.panel-primary
+            .panel-heading
+              h2.panel-title Location map
+            .panel-body
+              img.img-responsive.img-rounded(scr='')
+      .row
+        .col-xs-12
+          .panel.panel-primary.review-panel
+            .panel-heading
+              a.btn.btn-default.pull-right(href='/location/review/new') Add review 
+              h2.panel-title Customer reviews
+            .panel-body.review-cintainer
+              .row
+                .review
+                  .well.well-sm.review-header
+                    span.rating
+                      span.glyphicon.glyphicon-heart
+                      span.glyphicon.glyphicon-heart 
+                      span.glyphicon.glyphicon-heart 
+                      span.glyphicon.glyphicon-heart
+                    &nbsp;
+                    sapn.reviewAuthor Ting
+                    &nbsp;
+                    small.reviewTimestamp 7/19/2017
+                  .col-xs-12
+                    p Love coffee here!!!
+
+              .row
+                .review
+                  .well.well-sm.review-header
+                    span.rating
+                      span.glyphicon.glyphicon-heart
+                      span.glyphicon.glyphicon-heart 
+                      span.glyphicon.glyphicon-heart 
+                      span.glyphicon.glyphicon-heart
+                    &nbsp;
+                    sapn.reviewAuthor Shane
+                    &nbsp;
+                    small.reviewTimestamp 7/19/2017
+                  .col-xs-12
+                    p I do not drink coffee at all!
+
+
+
+
+
+
