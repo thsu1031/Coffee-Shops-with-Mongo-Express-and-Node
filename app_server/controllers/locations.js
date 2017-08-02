@@ -1,5 +1,5 @@
 /*Defining simple Mongoose schemes*/
-var mongoose =  require('Mongoose');
+var mongoose =  require('mongoose');
 /*GET home page*/
 module.exports.homelist =  function(req, res){
 
