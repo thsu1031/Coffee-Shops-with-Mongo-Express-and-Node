@@ -1,6 +1,7 @@
 /*Define database conection string and use it to open Mongoose connection */
 var mongoose = require('mongoose');
 var gracefulShutdown;
+
 var dbURI = 'mongodb://localhost/coffee'
 mongoose.connect(dbURI);
 
@@ -9,7 +10,6 @@ mongoose.connect(dbURI);
 mongoose.connection.on('connected', function(){
     console.log('Mongoose connected to' + dbURI);
 });
-
 
 mongoose.connection.on('error', function(err){
     console.log('Mongoose connection error' + err);
@@ -63,4 +63,13 @@ process.on('SIGINT', function(){
 
 });
 
+
+
+
+
+
+
+
+
 /*If the node process ends, close the Mongoose connection*/
+require('../controllers/locations');

@@ -1,85 +1,81 @@
 extends layout
+include _includes/sharedHTMLfunctions
+
+
+
 
 block content
-  .row.page-header
-    .col-lg-12
-      h1 Verita Coffee Bar & Roastery
+  .row.page-header: .col-lg-12
+    h1=pageHeader.title
   .row
     .col-xs-12.col-md-9
       .row
         .col-xs-12.col-sm-6
           p.rating
-            span.glyphicon.glyphicon-heart
-            span.glyphicon.glyphicon-heart 
-            span.glyphicon.glyphicon-heart 
-            span.glyphicon.glyphicon-heart 
-            span.glyphicon.glyphicon-heart-empty
-           p 9414 W Central Ave, Wichita, KS 67212
-           .panel.panel-primary
-             .panel-heading
-               h2.panel-title Opening hours
-             .panel-body
-               p Monday - Saturday: 7AM-7PM
-               p Sunday: Closed 
-           .panel.panel-primary
-             .panel-heading
-               h2.panel-title Facilites 
-             .panel-body
-               span.label.label-warning
-                 span.glyphicon.glyphicon-pushpin
-                 &nbsp; Prepared food
-               &nbsp;
-               span.label.label-warning
-                 span.glyphicon.glyphicon-pushpin
-                 &nbsp; Coffee
-               &nbsp;
-               span.label.label-warning
-                 span.glyphicon.glyphicon-pushpin
-                 &nbsp; Wifi
-               &nbsp;
+            +outputRating(location.rating)
+          p.address=location.address
+          .panel.panel-primary
+            .panel-heading
+              h2.panel-title Opening Hours
+            .panel-body
+              each op in location.openingTime
+                p
+                  |#{op.days}: &nbsp;
+                  if (op.closed==false)
+                    |#{op.opening} - #{op.closing}
+                  else
+                    | closed
+          .panel.panel-primary
+            .panel-heading
+              h2.panel-title Facilities
+            .panel-body
+              each facility in location.facilities
+                span.pushpin.label.label-warning
+                  span.glyphicon.glyphicon-pushpin
+                  &nbsp;#{facility}
+                &nbsp;
         .col-xs-12.col-sm-6.location-map
           .panel.panel-primary
             .panel-heading
               h2.panel-title Location map
             .panel-body
-              img.img-responsive.img-rounded(src='http://maps.googleapis.com/maps/api/staticmap?center=37.69489,%20-97.243174&zoom=17&size=400x350&sensor=false&markers=37.69489,-97.243174&scale=2')
-      .row
-        .col-xs-12
-          .panel.panel-primary.review-panel
-            .panel-heading
-              a.btn.btn-default.pull-right(href='/location/review/new') Add review 
-              h2.panel-title Customer reviews
-            .panel-body.review-cintainer
-              .row
-                .review
-                  .well.well-sm.review-header
-                    span.rating
-                      span.glyphicon.glyphicon-heart
-                      span.glyphicon.glyphicon-heart 
-                      span.glyphicon.glyphicon-heart 
-                      span.glyphicon.glyphicon-heart
+                img.img-responsive.img-rounded(src='http://maps.googleapis.com/maps/api/staticmap?center=#{location.coords.let},%20#{location.coords.lng}4&zoom=17&size=400x350&sensor=false&markers=#{location.coords.let},#{location.coords.lng}&scale=2')
+  .row
+    .col-xs-12
+      .panel.panel-primary.review-panel
+        .panel-heading
+          a.btn.btn-default.pull-right(href='/location/review/new') Add review
+          h2.panel-title Customer reviews
+        .panel-body.review-container
+          each review in location.reviews
+            .row
+              .review
+                .well.well-sm.review-header
+                  span.rating
+                    +outputRating(review.rating)
                     &nbsp;
-                    sapn.reviewAuthor Ting
-                    &nbsp;
-                    small.reviewTimestamp 7/19/2017
-                  .col-xs-12
-                    p Love coffee here!!!
+                    |#{review.author}
+                    |#{review.timestamp}
+                .col-xs-12
+                  p=review.reviewText
+  //-
+    .col-xs-12.col-md-3
+      p.lead #{location.name} #{sidebar.context}
+      p=sidebar.callToActin
 
-              .row
-                .review
-                  .well.well-sm.review-header
-                    span.rating
-                      span.glyphicon.glyphicon-heart
-                      span.glyphicon.glyphicon-heart 
-                      span.glyphicon.glyphicon-heart 
-                      span.glyphicon.glyphicon-heart
-                    &nbsp;
-                    sapn.reviewAuthor Shane
-                    &nbsp;
-                    small.reviewTimestamp 7/19/2017
-                  .col-xs-12
-                    p I do not drink coffee at all!
 
+
+                
+
+
+
+
+
+
+
+          
+
+    
 
 
 
