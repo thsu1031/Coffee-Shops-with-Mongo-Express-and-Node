@@ -3,12 +3,17 @@ var mongoose = require('mongoose');
 var gracefulShutdown;
 
 var dbURI = 'mongodb://localhost/coffee'
+
+if (process.env.NODE_ENV ==='production'){
+    dbURI = 'mongodb://heroku_djlvk5cr:g2c58uctobcvfshl91lndmcv2f@ds163010.mlab.com:63010/heroku_djlvk5cr'
+}
+
 mongoose.connect(dbURI);
 
 
 /*Listen for Mongoose connection events and output statuses to console*/
 mongoose.connection.on('connected', function(){
-    console.log('Mongoose connected to' + dbURI);
+    console.log('Mongoose connected to ' + dbURI);
 });
 
 mongoose.connection.on('error', function(err){
