@@ -1,11 +1,12 @@
 var mongoose = require('mongoose');
 
+
 /*Define a schema for reviews*/
 var reviewSchema = new mongoose.Schema({
 	author: String,
 	rating: {type: Number, required: true, min: 0, max: 5},
 	reviewText: String,
-	createdOn: {type: Date, default: Data.now}
+	createdOn: {type: Date, default: Date.now}
 });
 
 /*Define a schema for opening time*/
@@ -19,7 +20,7 @@ var openingTimeSchema = new mongoose.Schema({
 /*Start main location schema definition*/
 var locationSchema = new mongoose.Schema({
 	name: {type: String, required: true},
-	rating: {type: Numbrt, required: true, min: 0; max: 5},
+	rating: {type: Number, required: true, min: 0, max: 5},
 	address: String,
 	facilities: [String],
 	/*Use 2dsphere to add support for GeoJSON longitude and latitude coordinate pairs*/
@@ -32,4 +33,4 @@ var locationSchema = new mongoose.Schema({
 	reviews: [reviewSchema]
 });
 
-mongoose.model('Locstion, locationSchema');
+mongoose.model('Location', locationSchema);

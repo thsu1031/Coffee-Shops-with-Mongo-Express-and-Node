@@ -10,7 +10,6 @@ if (process.env.NODE_ENV ==='production'){
 
 mongoose.connect(dbURI);
 
-
 /*Listen for Mongoose connection events and output statuses to console*/
 mongoose.connection.on('connected', function(){
     console.log('Mongoose connected to ' + dbURI);
@@ -70,11 +69,5 @@ process.on('SIGINT', function(){
 
 
 
-
-
-
-
-
-
 /*If the node process ends, close the Mongoose connection*/
-require('../controllers/locations');
+require('./locations');
