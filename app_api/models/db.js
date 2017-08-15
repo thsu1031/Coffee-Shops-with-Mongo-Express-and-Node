@@ -2,7 +2,7 @@
 var mongoose = require('mongoose');
 var gracefulShutdown;
 
-var dbURI = 'mongodb://localhost/coffee'
+var dbURI = 'mongodb://localhost/COFFEE-NEAR-ME'
 
 if (process.env.NODE_ENV ==='production'){
     dbURI = 'mongodb://heroku_djlvk5cr:g2c58uctobcvfshl91lndmcv2f@ds163010.mlab.com:63010/heroku_djlvk5cr'
@@ -67,7 +67,6 @@ process.on('SIGINT', function(){
 
 });
 
-
-
+// BRING IN YOUR SCHEMAS & MODELS
 /*If the node process ends, close the Mongoose connection*/
 require('./locations');

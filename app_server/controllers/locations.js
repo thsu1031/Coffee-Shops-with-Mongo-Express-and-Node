@@ -19,7 +19,7 @@ module.exports.homelist =  function(req, res){
 			distance: '100m'
 	
 		},{
-			name: 'Ecclesia Coffee & Community ',
+			name: 'Ecclesia Coffee & Community',
 			address: '7130 W Maple St #280, Wichita, KS 67209',
 			rating: 4,
 			facilities: ['Quick bite','College students','Great dessert'],

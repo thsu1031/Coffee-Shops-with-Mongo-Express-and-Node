@@ -24,7 +24,7 @@ var locationSchema = new mongoose.Schema({
 	address: String,
 	facilities: [String],
 	/*Use 2dsphere to add support for GeoJSON longitude and latitude coordinate pairs*/
-	coords: {
+	 coords: {
 		type: [Number], 
 		index: '2dsphere'
 	},
