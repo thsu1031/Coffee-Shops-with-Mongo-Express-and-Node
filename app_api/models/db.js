@@ -68,5 +68,4 @@ process.on('SIGINT', function(){
 });
 
 // BRING IN YOUR SCHEMAS & MODELS
-/*If the node process ends, close the Mongoose connection*/
 require('./locations');
