@@ -45,7 +45,7 @@ var showError = function(req, res, status){
 
 	if (status===404){
 		title = "404, page not found";
-		content = "Oh dear, Looks like we cannot find this page. sorry. ";
+		content = "This is not the web page you are looking for";
 	}
 	else{
 		title =  status +" something is going wrong";
