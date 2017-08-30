@@ -17,7 +17,6 @@ var getRadsFromDistance = function(distance){
     return parseFloat(distance / earthRadius);
 };*/
 
-
 module.exports.locationsListByDistance = function(req, res){
 
     var lng = parseFloat(req.query.lng);
@@ -138,7 +137,7 @@ module.exports.locationsUpdateOne = function(req, res){
               return;
             }
         
-        
+
           name = String(req.body.name),
           address = String(req.body.address),
           facilities = String(req.body.facilities).split(','),

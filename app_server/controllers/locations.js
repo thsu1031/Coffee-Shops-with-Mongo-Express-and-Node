@@ -1,100 +1,175 @@
 /*Defining simple Mongoose schemes*/
-var mongoose =  require('mongoose');
-/*GET home page*/
-module.exports.homelist =  function(req, res){
+//var mongoose =  require('mongoose');
+var request = require('request');
+var apiOptions = {
+	server: "http://localhost:3000"
+};
 
-	res.render('locations-list', {
-		title: 'COFFEE NEAR ME - COFFEE NEAR ME helps you find the best places for a Coffee in Wichita!',
-		pageHeader: {
+if(process.env.NODE_ENV === 'production'){
+    apiOptions.server = "https://serene-thicket-75508.herokuapp.com";
+};
+
+var formatDistance = function(distance){
+	var numDistance, unit;
+	numDistance = Math.floor(distance*100)/100;
+	unit = ' miles';
+	return numDistance + unit;
+}
+
+var renderHomepage = function(req, res, responseBody){
+	var message;
+	if(!(responseBody instanceof Array)){
+		message = "API lookup error";
+		responseBody = [];
+	}else{
+		if(!responseBody.length){
+			message = "No place found nearby";
+		}
+	}
+	res.render('locations-list',{
+		title: 'COFFEE NEAR ME - COFFEE NEAR ME helps you find the best places for a Coffee in Wichita',
+		pageHeader:{
 			title: 'COFFEE NEAR ME',
 			strapline: 'good days srart with you and coffee'
 		},
-		sidebar: "COFFEE NEAR ME helps you find the best places for a Coffee in Wichita!",
-		locations: [
-		{
-			name: 'Verita Coffee Bar & Roastery',
-			address: '9414 W Central Ave, Wichita, KS 67212',
-			rating: 5,
-			facilities: ['Prepared foods','Coffee','College students'],
-			distance: '100m'
+		sidebar:"COFFEE NEAR ME helps you find the best places for a Coffee in Wichita!",
+		locationssss: responseBody,
+		message: message
+
+	});// end of render 
+}
+
+var showError = function(req, res, status){
 	
-		},{
-			name: 'Ecclesia Coffee & Community',
-			address: '7130 W Maple St #280, Wichita, KS 67209',
-			rating: 4,
-			facilities: ['Quick bite','College students','Great dessert'],
-			distance: '200m'
-		},{
-			name: "Scooter's Coffee",
-			address: '7399 W Central Ave, Wichita, KS 67212',
-			rating: 3, 
-			facilities: ['Prepared food','Coffee','College students'],
-			distance: '300m'
-		}
-		]
+	var title, content;
 
+	if (status===404){
+		title = "404, page not found";
+		content = "Oh dear, Looks like we cannot find this page. sorry. ";
+	}
+	else{
+		title =  status+"something is going wrong";
+		content = "Something is wrong";
+	}
+	res.status(status);
+	res.render('generic-text',{
+		title: title,
+		content: content
 	});
-};
+} // end of showError
 
-/*GET locationInfo page*/
-module.exports.locationInfo = function(req, res){
+var getLocationInfo = function(req, res, callback){
+	
+	var requestOptions, path;
+	
+	path = "/api/locations/"+ req.params.locationid;
 
-	res.render('location-info', {
-		title: 'Verita Coffee Bar & Roastery',
-		pageHeader: {
-			title: 'Verita Coffee Bar & Roastery',
+	requestOptions = {
+		url: apiOptions.server + path,
+		method: "GET", 
+		json: {},
+	};
+    
+    request(
+    	requestOptions, 
+    	function(err, response, body){
+    		var data = body;
+    		
+    		if(response.statusCode === 200){
+    			
+    			data.coords = {
+    				lng: body.coords.lng,
+    				lat: body.coords.lat
+    			};
+    			callback(req, res, data);
+    		} else{
+    			//console.log('gggggg');
+    			showError(req, res, response.statusCode);
+    		}
+            
+    	});// end of request & callback function 
+
+}// end of getLocationInfo
+
+module.exports.homelist = function(req, res){
+
+	var requestOptions, path;
+	
+	path = '/api/locations';
+
+	requestOptions = {
+		url: apiOptions.server + path,
+		method: "GET",
+		json: {},
+		qs: {
+			lng: -97.4533247,
+			lat: 37.6802974,
+			maxDistance: 20000
+		}
+	};
+	//request(options, callback function)
+	request(requestOptions, 
+		function(err, response, body) {
+			var i, data;
+			data = body;
+			if (response.statusCode === 200 && data.length){
+			    for (i=0; i < data.length; i++){
+				//console.log('yay');
+				data[i].distance = formatDistance(data[i].distance);
+			    }
+			}
+		    renderHomepage(req, res, data);
+	    }
+	);
+}// end of module homelist
+
+var renderDetailPage = function(req, res, locDetail){
+	
+	res.render('location-info',{
+		
+		title: locDetail.name,
+		pageHeader:{
+			title: locDetail.name
 		},
 		sidebar: {
-		    context:'COFFEE NEAR ME helps you find the best places for a Coffee in Wichita!',
+			context:'COFFEE NEAR ME helps you find the best places for a Coffee in Wichita!',
 		    callToAction: 'Please leave a review!'
-	},
-	location:{
-		name: 'Verita Coffee Bar & Roastery',
-		rating: 5,
-		address: '9414 W Central Ave, Wichita, KS 67212',
-		facilities: ['Prepared foods', 'Coffee', 'College students'],
-		coords:{
-			lat: 37.69489,
-			lng:-97.243174
 		},
-		openingTime:[{
-			days: 'Monday - Saturday',
-			opening: '7:00',
-			closing: '19:00',
-			closed: false
-		},{
-			days: 'Sunday',
-			closed: true
-		}],
-		reviews:[{
-			author: 'Ting', 
-			rating: 5,
-			timestamp: '7/26/2017',
-			reviewText: 'Love it here!!'
-		},{
-			author: 'Shane',
-			rating: 5,
-			timestamp: '7/26/2017',
-			reviewText: 'Free wifi is the best!'
+		
+		location: locDetail
+	});
 
-		}]
+} // end of renderDetailPage
 
-      } /*end of location*/
+module.exports.locationInfo = function(req, res){
+	getLocationInfo(req, res, function(req, res, responseData){
+		renderDetailPage(req, res, responseData)
 
-	}); /*end of render*/
-}; /*end of module.exports.locationInfo*/
+	});
+  
+
+}; // end of module locationInfo
 
 
+var renderReviewsForm =  function(req, res, locDetail){
+	res.render('location-review-form',{
+		title:  'Review ' + locDetail.name + 'on COFFEE NEAR ME',
+		pageHeader: { 
+			title: 'Review '+ locDetail.name
+		}
+	});
+}
 
 /*GET locationReview page*/
 module.exports.addReview = function(req, res){
+	getLocationInfo(req, res, function(req, res, responseData){
+		renderReviewsForm(req, res, responseData);
+	});
+}; //end of the module.exports.addReview
 
-	res.render('location-review-form', {
 
-		title: 'Review Verita Coffee Bar & Roastery on COFFEE NEAR ME',
-		pageHeader:{
-			title: 'Review Verita Coffee Bar & Roastery'
-		}
 
-	});/*end of the res.render-location-review-form*/
-}; /*end of the module.exports.addReview*/
+/*POST locationReviews page*/
+module.exports.doAddReview = function(req, res){
+
+}// end of doAddReview

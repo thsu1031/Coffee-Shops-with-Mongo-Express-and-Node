@@ -6,7 +6,7 @@ var reviewSchema = new mongoose.Schema({
 	author: {type: String},
 	rating: {type: Number,  min: 0, max: 5},
 	reviewText: {type: String},
-	createdOn: {type: Date, default: Date.now}
+	createdOn: {type: Date, "Default": Date.now}
 });
 
 /*Define a schema for opening time*/
