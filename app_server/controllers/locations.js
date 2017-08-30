@@ -48,7 +48,7 @@ var showError = function(req, res, status){
 		content = "Oh dear, Looks like we cannot find this page. sorry. ";
 	}
 	else{
-		title =  status+"something is going wrong";
+		title =  status +" something is going wrong";
 		content = "Something is wrong";
 	}
 	res.status(status);
@@ -167,9 +167,32 @@ module.exports.addReview = function(req, res){
 	});
 }; //end of the module.exports.addReview
 
-
-
 /*POST locationReviews page*/
 module.exports.doAddReview = function(req, res){
+	var requestOptions, path, postdata, locationid;
+    locationid = req.params.locationid;
 
+	path = "/api/locations/" + locationid + "/reviews";
+
+	postdata = {
+		author: String(req.body.name),
+		rating: req.body.rating,
+		reviewText: String(req.body.review)
+	};
+
+	requestOptions = {
+		url: apiOptions.server + path,
+		method: "POST",
+		json: postdata
+	};
+
+	request(requestOptions, function(err, response, body){
+		
+		if(response.statusCode === 200 || response.statusCode === 201){
+			res.redirect('/location/' + locationid);
+		}else{
+             //console.log('yay');
+            showError(req, res, response.statusCode);
+		}
+	});
 }// end of doAddReview

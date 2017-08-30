@@ -3,10 +3,10 @@ var mongoose = require('mongoose');
 
 /*Define a schema for reviews*/
 var reviewSchema = new mongoose.Schema({
-	author: {type: String},
+	author: {type: String, required: true},
 	rating: {type: Number,  min: 0, max: 5},
-	reviewText: {type: String},
-	createdOn: {type: Date, "Default": Date.now}
+	reviewText: {type: String, required: true},
+	createdOn: {type: Date, "default": Date.now}
 });
 
 /*Define a schema for opening time*/

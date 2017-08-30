@@ -50,9 +50,11 @@ block content
                 .well.well-sm.review-header
                   span.rating
                     +outputRating(review.rating)
-                    &nbsp;
-                    |#{review.author}
-                    |#{review.timestamp}
+                  span.reviewAuthor #{review.author}
+                  small.reviewTimestamp
+                      +formatDate(review.createdOn)
+                    
+                    
                 .col-xs-12
                   p=review.reviewText
   //-
