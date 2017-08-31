@@ -136,8 +136,7 @@ module.exports.locationsUpdateOne = function(req, res){
               sendJsonResponse(res, 404, err);
               return;
             }
-        
-
+    
           name = String(req.body.name),
           address = String(req.body.address),
           facilities = String(req.body.facilities).split(','),

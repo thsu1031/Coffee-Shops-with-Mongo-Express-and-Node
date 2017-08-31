@@ -146,7 +146,7 @@ module.exports.locationInfo = function(req, res){
 		renderDetailPage(req, res, responseData)
 
 	});
-  
+
 
 }; // end of module locationInfo
 
@@ -155,8 +155,12 @@ var renderReviewsForm =  function(req, res, locDetail){
 	res.render('location-review-form',{
 		title:  'Review ' + locDetail.name + 'on COFFEE NEAR ME',
 		pageHeader: { 
-			title: 'Review '+ locDetail.name
-		}
+			title: 'Review '+ locDetail.name,
+	
+		},
+		// send new error variable to view passing it query 
+	    //  parameters which it exists 
+		error: req.query.err
 	});
 }
 
@@ -185,14 +189,22 @@ module.exports.doAddReview = function(req, res){
 		method: "POST",
 		json: postdata
 	};
-
+    if (!postdata.author||!postdata.rating || !postdata.reviewText){
+    	res.redirect('/location/' + locationid + '/reviews/new?err=val')
+    } else {
+    	
 	request(requestOptions, function(err, response, body){
 		
 		if(response.statusCode === 200 || response.statusCode === 201){
 			res.redirect('/location/' + locationid);
-		}else{
-             //console.log('yay');
+		} else if(response.statusCode === 400 && body.name && body.name === "ValidationError"){
+			//console.log('yay');
+			res.redirect('/location/' + locationid + '/reviews/new?err=val');
+
+        }else{
+             console.log(body);
             showError(req, res, response.statusCode);
 		}
 	});
+}
 }// end of doAddReview
