@@ -16,18 +16,15 @@ var formatDistance = function(distance){
 	return numDistance + unit;
 }
 
-
-
-
 var renderHomepage = function(req, res, responseBody){
 	var message;
-	var responseBodyy;
+	var responseBodyy = [];
 
 	//message = typeof(responseBody);
 	//console.log(responseBody);
 	responseBodyy = Array.prototype.slice.call(responseBody);
 
-    //console.log(responseBodyy.length);
+    console.log(responseBodyy.length);
 	
 	if(!(responseBodyy instanceof Array)){
 		message = "API lookup errorrrrrr";
@@ -37,7 +34,7 @@ var renderHomepage = function(req, res, responseBody){
 		if(!responseBodyy.length){
 			//message = "No place found nearby";
 			//console.log(responseBodyy.length);
-			message = responseBodyy.length
+			message = responseBodyy.length;
 		}
 	}
 	res.render('locations-list',{
