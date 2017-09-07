@@ -25,19 +25,21 @@ var renderHomepage = function(req, res, responseBody){
 
 	//message = typeof(responseBody);
 	//console.log(responseBody);
-	responseBodyy = Array.prototype.slice.call(responseBody)
+	responseBodyy = Array.prototype.slice.call(responseBody);
 
-    console.log(responseBodyy.length)
+    //console.log(responseBodyy.length);
 	
 	if(!(responseBodyy instanceof Array)){
 		message = "API lookup errorrrrrr";
 		responseBodyy = [];
 	}
-	/*else{
+	else{
 		if(!responseBodyy.length){
-			message = "No place found nearby";
+			//message = "No place found nearby";
+			//console.log(responseBodyy.length);
+			message = responseBodyy.length
 		}
-	}*/
+	}
 	res.render('locations-list',{
 		title: 'COFFEE NEAR ME - COFFEE NEAR ME helps you find the best places for a coffee in Wichita!',
 		pageHeader:{
