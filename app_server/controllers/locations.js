@@ -28,14 +28,16 @@ var renderHomepage = function(req, res, responseBody){
 	responseBodyy = Array.prototype.slice.call(responseBody)
 
     console.log(responseBodyy.length)
+	
 	if(!(responseBodyy instanceof Array)){
 		message = "API lookup errorrrrrr";
 		responseBodyy = [];
-	}else{
+	}
+	/*else{
 		if(!responseBodyy.length){
 			message = "No place found nearby";
 		}
-	}
+	}*/
 	res.render('locations-list',{
 		title: 'COFFEE NEAR ME - COFFEE NEAR ME helps you find the best places for a coffee in Wichita!',
 		pageHeader:{
