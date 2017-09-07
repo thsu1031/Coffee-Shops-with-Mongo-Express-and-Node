@@ -16,12 +16,18 @@ var formatDistance = function(distance){
 	return numDistance + unit;
 }
 
+
+
+
 var renderHomepage = function(req, res, responseBody){
 	var message;
-	
-	//message = typeof(responseBody);
 
-	if(!(responseBody instanceof Object)){
+	//message = typeof(responseBody);
+	//console.log(responseBody);
+	responseBody = Array.prototype.slice.call(responseBody)
+
+
+	if(!(responseBody instanceof Array)){
 		message = "API lookup errorrrrrr";
 		responseBody = [];
 	}else{
