@@ -32,9 +32,9 @@ var renderHomepage = function(req, res, responseBody){
 	}
 	else{
 		if(!responseBodyy.length){
-			//message = "No place found nearby";
+			message = responseBodyy;
 			//console.log(responseBodyy.length);
-			message = responseBodyy.length;
+			//message = responseBodyy.length;
 		}
 	}
 	res.render('locations-list',{
