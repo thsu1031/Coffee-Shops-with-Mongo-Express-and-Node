@@ -18,8 +18,9 @@ var formatDistance = function(distance){
 
 var renderHomepage = function(req, res, responseBody){
 	var message;
+	
 	if(!(responseBody instanceof Array)){
-		message = "API lookup error";
+		message = "API lookup errorrrrrr";
 		responseBody = [];
 	}else{
 		if(!responseBody.length){
@@ -132,7 +133,7 @@ var renderDetailPage = function(req, res, locDetail){
 			title: locDetail.name
 		},
 		sidebar: {
-			context:'COFFEE NEAR ME helps you find the best places for a Coffee in Wichita!',
+			context:'COFFEE NEAR ME helps you find the best places for a coffee in Wichita!!',
 		    callToAction: 'Please leave a review!'
 		},
 		
