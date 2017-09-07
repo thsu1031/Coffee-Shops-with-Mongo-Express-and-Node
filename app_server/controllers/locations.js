@@ -21,14 +21,14 @@ var renderHomepage = function(req, res, responseBody){
 	
 	//message = typeof(responseBody);
 
-	if(!(responseBody instanceof Object)){
+	/*if(!(responseBody instanceof Object)){
 		message = "API lookup errorrrrrr";
 		responseBody = [];
 	}else{
 		if(!responseBody.length){
 			message = "No place found nearby";
 		}
-	}
+	}*/
 	res.render('locations-list',{
 		title: 'COFFEE NEAR ME - COFFEE NEAR ME helps you find the best places for a coffee in Wichita!',
 		pageHeader:{
@@ -115,8 +115,8 @@ module.exports.homelist = function(req, res){
 		function(err, response, body) {
 			var i, data;
 			data = body;
-			if (response.statusCode === 200 && data.length){
-			    for (i=0; i < data.length; i++){
+			if (response.statusCode === 200){
+			    for (i=0; i < 10; i++){
 				//console.log('yay');
 				data[i].distance = formatDistance(data[i].distance);
 			    }
