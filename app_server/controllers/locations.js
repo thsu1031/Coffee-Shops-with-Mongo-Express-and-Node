@@ -18,7 +18,7 @@ var formatDistance = function(distance){
 
 var renderHomepage = function(req, res, responseBody){
 	var message;
-	var responseBodyy = [];
+	var responseBodyy = new Array();
 
 	//message = typeof(responseBody);
 	//console.log(responseBody);
