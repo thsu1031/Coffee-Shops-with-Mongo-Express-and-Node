@@ -19,16 +19,16 @@ var formatDistance = function(distance){
 var renderHomepage = function(req, res, responseBody){
 	var message;
 	
-	message = typeof(responseBody);
+	//message = typeof(responseBody);
 
-	/*if(!(responseBody instanceof Array)){
+	if(!(responseBody instanceof Object)){
 		message = "API lookup errorrrrrr";
 		responseBody = [];
 	}else{
 		if(!responseBody.length){
 			message = "No place found nearby";
 		}
-	}*/
+	}
 	res.render('locations-list',{
 		title: 'COFFEE NEAR ME - COFFEE NEAR ME helps you find the best places for a coffee in Wichita!',
 		pageHeader:{
