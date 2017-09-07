@@ -21,17 +21,18 @@ var formatDistance = function(distance){
 
 var renderHomepage = function(req, res, responseBody){
 	var message;
+	var responseBodyy;
 
 	//message = typeof(responseBody);
 	//console.log(responseBody);
-	responseBody = Array.prototype.slice.call(responseBody)
+	responseBodyy = Array.prototype.slice.call(responseBody)
 
-
-	if(!(responseBody instanceof Array)){
+    console.log(responseBodyy.length)
+	if(!(responseBodyy instanceof Array)){
 		message = "API lookup errorrrrrr";
-		responseBody = [];
+		responseBodyy = [];
 	}else{
-		if(!responseBody.length){
+		if(!responseBodyy.length){
 			message = "No place found nearby";
 		}
 	}
@@ -42,7 +43,7 @@ var renderHomepage = function(req, res, responseBody){
 			strapline: 'good days srart with you and coffee'
 		},
 		sidebar:"COFFEE NEAR ME helps you find the best places for a coffee in Wichita!!",
-		locationssss: responseBody,
+		locationssss: responseBodyy,
 		message: message
 
 	});// end of render 
