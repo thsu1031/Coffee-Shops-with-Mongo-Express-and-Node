@@ -28,12 +28,12 @@ var renderHomepage = function(req, res, responseBody){
 		}
 	}
 	res.render('locations-list',{
-		title: 'COFFEE NEAR ME - COFFEE NEAR ME helps you find the best places for a Coffee in Wichita',
+		title: 'COFFEE NEAR ME - COFFEE NEAR ME helps you find the best places for a coffee in Wichita!',
 		pageHeader:{
 			title: 'COFFEE NEAR ME',
 			strapline: 'good days srart with you and coffee'
 		},
-		sidebar:"COFFEE NEAR ME helps you find the best places for a Coffee in Wichita!",
+		sidebar:"COFFEE NEAR ME helps you find the best places for a coffee in Wichita!!",
 		locationssss: responseBody,
 		message: message
 
