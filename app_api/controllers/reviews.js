@@ -31,8 +31,8 @@ module.exports.reviewsCreate = function(req, res){
 };//end of reviewsCreate
 
 
-
 var addReview = function(req, res, location){
+  
   if(!location){
     sendJsonResponse(res, 400, {"message":"location not found"});
   }
@@ -269,7 +269,6 @@ module.exports.reviewsDeleteOne = function(req, res){
                 updateAverageRating(location._id);
                 sendJsonResponse(res, 204, null);
               }
-
             });
           }
         }

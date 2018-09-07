@@ -4,9 +4,9 @@ var router = express.Router();
 //var ctrlMain = require('../controllers/main');
 var ctrLocations = require('../controllers/locations');
 var ctrOthers = require('../controllers/others');
+
 // have two variables we can use reference in the route definition,
 // which will contain different collection of routes 
-
 
 /*Locations pages*/
 router.get('/', ctrLocations.homelist);

@@ -12,3 +12,9 @@ mixin formatDate(dateString)
   -var y = date.getFullYear();
   -var output = d + ' ' + m + ' ' + y;
   =output
+
+mixin countReviews(review)
+  - if(review>1)
+    h7 &nbsp reviews
+  - else
+    h7 &nbsp review

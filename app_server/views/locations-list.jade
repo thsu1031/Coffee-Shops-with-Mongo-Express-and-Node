@@ -1,12 +1,11 @@
 extends layout
-
 include _includes/sharedHTMLfunctions
 
 block content
   #banner.page-header
     .row
       .col-lg-6
-        h1= pageHeader.title
+        h1=pageHeader.title
          small &nbsp;#{pageHeader.strapline}
   .row
     .col-xs-12.col-sm-8
@@ -16,16 +15,23 @@ block content
           .col-xs-12.list-group-item
             h4 
               a(href="/location/#{location._id}")=location.name
+                .bar
+                  // img.img-responsive.img-rounded(src="https://static-maps.yandex.ru/1.x/?lang=en-US&ll=#{location.coords[0]},#{location.coords[1]}&z=13&l=map&size=600,300")
+                  img.img-responsive.img-rounded(src="https://www.mapquestapi.com/staticmap/v5/map?&locations=#{location.coords[1]},#{location.coords[0]}&zoom=14&size=300,300&key=eP7jC98PgkxUQdrrNaszUqnCAv1VDaD7")
               small &nbsp;
                 +outputRating(location.rating)
-              span.badge.pull-right.badge-default= location.distance
+                &nbsp
+              span.badge.pull-center.badge-light= location.reviews.length 
+                  +countReviews(location.reviews.length)
+                  //span.badge.pull-right.badge-default=location.reviews[0].reviewText
+              // span.badge.pull-right.badge-default= location.coords
             p.address=location.address
             p
               each facility in location.facilities
                 span.label.label-warning=facility
                 | &nbsp;
     .col-xs-12.col-sm-4 
-      p.lead= sidebar
+      p.lead=sidebar
 
 
 

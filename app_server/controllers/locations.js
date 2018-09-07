@@ -27,7 +27,7 @@ var renderHomepage = function(req, res, responseBody){
     console.log(responseBodyy.length);
 	
 	if(!(responseBodyy instanceof Array)){
-		message = "API lookup errorrrrrr";
+		message = "API lookup error";
 		responseBodyy = [];
 	}
 	else{
@@ -38,12 +38,12 @@ var renderHomepage = function(req, res, responseBody){
 		}
 	}
 	res.render('locations-list',{
-		title: 'COFFEE NEAR ME - COFFEE NEAR ME helps you find the best places for a coffee in Wichita!',
+		title: 'Coffee Shops in Wichita',
 		pageHeader:{
-			title: 'COFFEE NEAR ME',
-			strapline: 'good days srart with you and coffee'
+			title: 'Coffee Shops in Wichita',
+			strapline: 'good days start with you and coffee'
 		},
-		sidebar:"COFFEE NEAR ME helps you find the best places for a coffee in Wichita!!",
+		sidebar:"What are your favorite coffee shops?",
 		locationssss: responseBodyy,
 		message: message
 
@@ -84,16 +84,18 @@ var getLocationInfo = function(req, res, callback){
     request(
     	requestOptions, 
     	function(err, response, body){
+    		
     		var data = body;
     		
     		if(response.statusCode === 200){
     			
-    			data.coords = {
-    				lng: body.coords.lng,
-    				lat: body.coords.lat
-    			};
+    			// data.coords = {
+    			// 	lng: body.coords.lng,
+    			// 	lat: body.coords.lat
+    			// };
+    			// console.log("data.coords" + data.coords[0]);
     			callback(req, res, data);
-    		} else{
+    		}else{
     			//console.log('gggggg');
     			showError(req, res, response.statusCode);
     		}
@@ -143,7 +145,7 @@ var renderDetailPage = function(req, res, locDetail){
 			title: locDetail.name
 		},
 		sidebar: {
-			context:'COFFEE NEAR ME helps you find the best places for a coffee in Wichita!!',
+			context:'COFFEE NEAR ME helps you find the best places for a coffee in Wichita!',
 		    callToAction: 'Please leave a review!'
 		},
 		
@@ -155,19 +157,16 @@ var renderDetailPage = function(req, res, locDetail){
 module.exports.locationInfo = function(req, res){
 	getLocationInfo(req, res, function(req, res, responseData){
 		renderDetailPage(req, res, responseData)
-
 	});
 
 
 }; // end of module locationInfo
-
 
 var renderReviewsForm =  function(req, res, locDetail){
 	res.render('location-review-form',{
 		title:  'Review ' + locDetail.name + 'on COFFEE NEAR ME',
 		pageHeader: { 
 			title: 'Review '+ locDetail.name,
-	
 		},
 		// send new error variable to view passing it query 
 	    //  parameters which it exists 

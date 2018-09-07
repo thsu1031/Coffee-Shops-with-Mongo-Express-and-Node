@@ -24,11 +24,11 @@ var locationSchema = new mongoose.Schema({
 	rating: {type: Number,"default":0,  min: 0, max: 5},
 	facilities: [String],
 	/*Use 2dsphere to add support for GeoJSON longitude and latitude coordinate pairs*/
-	 /*coords: {
+	 coords: {
 		type: [Number], 
 		index: '2dsphere'
-	},*/
-	coords: [Number],
+	},
+	// coords: [Number],
 
 	/*Reference opening times and review schemas to add nested subdocuments*/
 	openingTime: [openingTimeSchema],
