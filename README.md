@@ -4,9 +4,9 @@ Built from Tutorial in "Getting Mean with Mongo, Express, and Node" by Simon Hol
 :coffee:
 
 
-- [ ] Fix 400 Bad Request Error for review page. 
-- [ ] Display the number of reviews in location list page.
-- [ ] Sort the coffee shops according to the corresponding ratings. 
+- [x] Fix 400 Bad Request Error for review page. 
+- [x] Display the number of reviews in location list page.
+- [x] Sort the coffee shops according to the corresponding ratings. 
 
 
 
