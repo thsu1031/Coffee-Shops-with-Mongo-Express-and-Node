@@ -1,6 +1,6 @@
 # Coffee Shops with Mongo, Express, and Node 
 
-Built from Tutorial in "Getting Mean with Mongo, Express, and Node" by Simon Holmes. 
+Built from the tutorial in "Getting Mean with Mongo, Express, and Node" by Simon Holmes. 
 :coffee:
 
  
