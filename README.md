@@ -8,6 +8,7 @@ Built from the tutorial in "Getting Mean with Mongo, Express, and Node" by Simon
 - [x] Sort the coffee shops according to the corresponding ratings. 
 - [x] Fix the position of navigation bar (Something wrong with the title).
 - [x] Fix 400 Bad Request error for review page. 
+- [ ] Use CSS animations 
 
 
 Please visit: http://serene-thicket-75508.herokuapp.com/
