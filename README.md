@@ -1,6 +1,6 @@
 # Coffee Shops with Mongo, Express, and Node 
 
-Built from the tutorial in "Getting Mean with Mongo, Express, and Node" by Simon Holmes. 
+Built from the tutorial in "Getting Mean with Mongo, Express, Angular, and Node" by Simon Holmes. 
 
 
 - [x] Display the number of reviews for each coffee shop in the location list page.
